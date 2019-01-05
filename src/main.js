@@ -1,16 +1,34 @@
-import { pingPong } from './ping-pong';
+import { blog, post } from './blogger';
 import './styles.css';
 import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-$(document).ready(function() {
-  $('#ping-pong-form').submit(function(event) {
-    event.preventDefault();
-    var goal = $('#goal').val();
-    var output = pingPong(goal);
-    output.forEach(function(element) {
-      $('#solution').append("<li>" + element + "</li>");
-    });
-  });
+
+$('#flashMessage').hide()
+
+$('#previewButton').click(function() {
+ const title = $('#blogTitleInput').val();
+ const content = $('#blogContentInput').val()
+ $('#blogTitlePreview').text(title);
+ $('#blogContentPreview').html(content);
+
+  $('#flashMessage')
+  .slideDown(500)
+  .delay(3000)
+  .slideUp(500);
+});
+
+
+$('#postButton').click(function() {
+ const title = $('#blogTitleInput').val();
+ const content = $('#blogContentInput').val();
+ let newPost = new post(title, content);
+ $('.blog-posts').append('<div class="well"<h2>' + newPost.title + '</h2><p>' + newPost.content + '</p></div>');
+
+
+  $('#flashMessage')
+  .slideDown(500)
+  .delay(3000)
+  .slideUp(500);
 });
